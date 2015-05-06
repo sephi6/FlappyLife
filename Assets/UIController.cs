@@ -8,6 +8,9 @@ public class UIController : MonoBehaviour {
 
     public int score = 0;
 
+	public bool entra = false;
+
+
 	// Use this for initialization
 
     public static UIController instance;
@@ -23,5 +26,11 @@ public class UIController : MonoBehaviour {
             Debug.LogError("Ya había un UI Controller");
         }
     }
+
+
+
+
+
+	
 
 }

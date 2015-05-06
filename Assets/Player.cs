@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
 
     public bool vivo = true;
 
+
 	// Use this for initialization
 	void Start () {
 	
@@ -19,12 +20,18 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0))
             {
+				//rigidbody.isKinematic = false;
+				UIController.instance.entra = true;
+				Debug.Log("entra: " + UIController.instance.entra);
                 rigidbody2D.velocity = force;
             }
             foreach (Touch i in Input.touches)
             {
                 if (i.phase == TouchPhase.Began)
                 {
+					
+					//rigidbody.isKinematic = false;
+					UIController.instance.entra = true;
                     rigidbody2D.velocity = force;
                 }
             }
