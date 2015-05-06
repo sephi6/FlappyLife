@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0))
             {
-				//rigidbody.isKinematic = false;
+				rigidbody2D.isKinematic = false;
 				UIController.instance.entra = true;
 				Debug.Log("entra: " + UIController.instance.entra);
                 rigidbody2D.velocity = force;
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
                 if (i.phase == TouchPhase.Began)
                 {
 					
-					//rigidbody.isKinematic = false;
+					rigidbody2D.isKinematic = false;
 					UIController.instance.entra = true;
                     rigidbody2D.velocity = force;
                 }
