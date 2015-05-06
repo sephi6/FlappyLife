@@ -45,9 +45,12 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        
+		if (collider.gameObject.tag == "techo") {
+		}else{
+
         vivo = false;
 		UIController.instance.scoreMenu.text = UIController.instance.score.ToString();
 		UIController.instance.menuMuerte.SetActive (true);
+		}
     }
 }
