@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     public bool vivo = true;
 
 
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -45,5 +47,7 @@ public class Player : MonoBehaviour {
     {
         
         vivo = false;
+		UIController.instance.scoreMenu.text = UIController.instance.score.ToString();
+		UIController.instance.menuMuerte.SetActive (true);
     }
 }

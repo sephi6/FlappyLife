@@ -11,6 +11,7 @@ public class obstacles : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gameObject.rigidbody2D.velocity = velocity;
+		Destroy (gameObject, 8f);
         //gameObject.transform.position = new Vector2(transform.position.x, transform.position.y - range * Random.value);
 	}
 	
@@ -19,7 +20,7 @@ public class obstacles : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other){
         UIController.instance.score += 1;
         UIController.instance.scoreText.text = "Score:" + UIController.instance.score;
-        Debug.Log("Tubo");
+        
        
     }
 }
