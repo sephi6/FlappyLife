@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
 
     public Text scoreText;
+
+    public Text bestScore;
 	public Text scoreMenu;
 
     public int score = 0;
@@ -13,10 +15,20 @@ public class UIController : MonoBehaviour {
 
 	public GameObject menuMuerte;
 
+    public int best;
+
 
 	// Use this for initialization
 
     public static UIController instance;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 
     void Awake()
     {

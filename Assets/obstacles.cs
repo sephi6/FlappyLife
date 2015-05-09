@@ -8,6 +8,8 @@ public class obstacles : MonoBehaviour {
 
     public float range = 4;
 
+    
+
 	// Use this for initialization
 	void Start () {
         gameObject.rigidbody2D.velocity = velocity;
@@ -18,8 +20,11 @@ public class obstacles : MonoBehaviour {
 	// Update is called once per frame
 	
     void OnTriggerEnter2D(Collider2D other){
+
+
+        gameObject.audio.Play();
         UIController.instance.score += 1;
-        UIController.instance.scoreText.text = "Score:" + UIController.instance.score;
+        UIController.instance.scoreText.text = "" + UIController.instance.score;
         
        
     }

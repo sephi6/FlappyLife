@@ -4,7 +4,15 @@ using System.Collections;
 public class UIControllerMenu : MonoBehaviour {
 
 	// Update is called once per frame
-	public void OnMouseDown () {
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+    public void OnMouseDown () {
 		Application.LoadLevel ("juego");
 	
 	}

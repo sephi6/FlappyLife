@@ -7,7 +7,13 @@ public class Player : MonoBehaviour {
 
     public bool vivo = true;
 
+    public AudioSource choque;
 
+    public AudioClip choque1;
+    public AudioClip choque2;
+    public AudioClip choque3;
+
+    public int random;
 
 
 	// Use this for initialization
@@ -24,8 +30,9 @@ public class Player : MonoBehaviour {
             {
 				rigidbody2D.isKinematic = false;
 				UIController.instance.entra = true;
-				Debug.Log("entra: " + UIController.instance.entra);
+
                 rigidbody2D.velocity = force;
+                gameObject.audio.Play();
             }
             foreach (Touch i in Input.touches)
             {
@@ -47,10 +54,40 @@ public class Player : MonoBehaviour {
     {
 		if (collider.gameObject.tag == "techo") {
 		}else{
+            random = Random.Range(0, 3);
 
+            switch (random)
+            {
+                case 0:
+                    Debug.Log("choque:" + random);
+                    choque.clip = choque1;
+                    break;
+                case 1:
+                    Debug.Log("choque:" + random);
+                    choque.clip = choque2;
+                    break;
+                case 2:
+                    Debug.Log("choque:" + random);
+                    choque.clip = choque3;
+                    
+                    break;
+            }
+
+        choque.Play();
+        
         vivo = false;
 		UIController.instance.scoreMenu.text = UIController.instance.score.ToString();
 		UIController.instance.menuMuerte.SetActive (true);
+
+        if (UIController.instance.score >= PlayerPrefs.GetInt("best", 0))
+        {
+           PlayerPrefs.SetInt("best", UIController.instance.score);
+           
+           Debug.Log("Entra score " + UIController.instance.best);
+        }
+        UIController.instance.best = PlayerPrefs.GetInt("best", 0);
+        UIController.instance.bestScore.text = UIController.instance.best.ToString();
+
 		}
     }
 }
