@@ -49,7 +49,12 @@ public class Player : MonoBehaviour {
         }
         
 	}
-
+    IEnumerator espera()
+    {
+        
+        yield return new WaitForSeconds(1.5f);
+        UIController.instance.menuMuerte.SetActive(true);
+    }
     void OnCollisionEnter2D(Collision2D collider)
     {
 		if (collider.gameObject.tag == "techo") {
@@ -77,17 +82,27 @@ public class Player : MonoBehaviour {
         
         vivo = false;
 		UIController.instance.scoreMenu.text = UIController.instance.score.ToString();
-		UIController.instance.menuMuerte.SetActive (true);
 
         if (UIController.instance.score >= PlayerPrefs.GetInt("best", 0))
         {
-           PlayerPrefs.SetInt("best", UIController.instance.score);
-           
-           Debug.Log("Entra score " + UIController.instance.best);
+            PlayerPrefs.SetInt("best", UIController.instance.score);
+
+            Debug.Log("Entra score " + UIController.instance.best);
         }
         UIController.instance.best = PlayerPrefs.GetInt("best", 0);
         UIController.instance.bestScore.text = UIController.instance.best.ToString();
 
+        StartCoroutine(espera());
+
+		
+
+        
+
 		}
+
+        
+
+        
     }
+    
 }
