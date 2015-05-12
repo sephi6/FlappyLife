@@ -4,10 +4,13 @@ using System.Collections;
 
 public class FBHolder : MonoBehaviour {
 
+
+
 	// Use this for initialization
 	public void OnMouseDown () {
         FB.Init(SetInit, OnHideUnity);
 	}
+
 
     private void SetInit()
     {
@@ -54,8 +57,24 @@ public class FBHolder : MonoBehaviour {
         }
     }
 
+	public void share(){
+		FB.Feed(
+
+		linkCaption: "To guapo el juego",
+		linkName: "Flappy Life! ",
+		//poner un link valido
+		link:"https://imgflip.com/s/meme/Ancient-Aliens.jpg/" + FB.AppId +"/?challenge_brag=" +(FB.IsLoggedIn ? FB.UserId: "quest" ) );
+
+		
+
+		}
+
+
+
+	}
+
     
 	
 	// Update is called once per frame
 	
-}
+
