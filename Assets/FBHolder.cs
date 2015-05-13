@@ -5,10 +5,17 @@ using System.Collections.Generic;
 
 public class FBHolder : MonoBehaviour {
 
+
+    public static List<string> urls;
+
+    void Start()
+    {
+        urls = new List<string>();
+    }
 	// Use this for initialization
 	public void OnMouseDown () {
         FB.Init(SetInit, OnHideUnity);
-        getPics();
+        
 	}
 
     private void SetInit()
@@ -49,6 +56,7 @@ public class FBHolder : MonoBehaviour {
         {
             Debug.Log("FB login worked!");
             Debug.Log(FB.UserId);
+            getPics();
         }
         else
         {
@@ -58,24 +66,35 @@ public class FBHolder : MonoBehaviour {
 
     public void getPics()
     {
-        FB.API("/me/friends?fields=id,name,picture", Facebook.HttpMethod.POST, PicsCallback);
+        FB.API("/me/friends?fields=picture", Facebook.HttpMethod.GET, PicsCallback);
     }
 
     private void PicsCallback(FBResult result)
     {
-       Dictionary<string,List<object>> dict= Json.Deserialize(result.Text) as Dictionary <string,List<object>>;
-       object friendsH;
+       Dictionary<string,object> dict= Json.Deserialize(result.Text) as Dictionary <string,object>;
+       
        var friends = new List<object>();
-       string friendName;
 
-       List<string> urls= new List<string>();
+       List<object> cosasEnData = dict["data"] as List<object>;
 
-       foreach (List<object> i in dict["data"])
-       {
-           Dictionary<string, Dictionary<string, object>> aux = i[0] as Dictionary<string, Dictionary<string, object>>;
-           string url = aux["picture"]["url"] as string;
-           urls.Add(url);
-       }
+        foreach(object o in cosasEnData)
+        {
+            Dictionary<string, object> enData = o as Dictionary<string, object>;
+
+            Dictionary<string, object> picture = enData["picture"] as Dictionary<string, object>;
+
+            Dictionary<string, object> datapicture = picture["data"] as Dictionary<string, object>;
+
+            urls.Add(datapicture["url"] as string);
+        }
+       
+
+       //foreach (object i in dict["data"])
+       //{
+       //    Dictionary<string, Dictionary<string, object>> aux = i[0] as Dictionary<string, Dictionary<string, object>>;
+       //    string url = aux["picture"]["url"] as string;
+       //    urls.Add(url);
+       //}
        //if (dict.TryGetValue("friends", out friendsH))
        //{
        //    friends = (List<object>)(((Dictionary<string, object>)friendsH)["data"]);
