@@ -6,17 +6,15 @@ public class fotos : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-
-        int random = Random.Range(0, FBHolder.urls.Count);
-        if (FBHolder.urls.Count != 0)
-        {
-            StartCoroutine(cargaString(FBHolder.urls[random]));
-        }
-        else
-        {
-            Debug.LogWarning("No tenemos url");
-        }
-    }
+		if (FB.IsLoggedIn) {
+			int random = Random.Range (0, FBHolder.urls.Count);
+			if (FBHolder.urls.Count != 0) {
+				StartCoroutine (cargaString (FBHolder.urls [random]));
+			} else {
+				Debug.LogWarning ("No tenemos url");
+			}
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
