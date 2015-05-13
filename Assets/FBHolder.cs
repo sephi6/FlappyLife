@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using Facebook.MiniJSON;
+using System.Collections.Generic;
 
 public class FBHolder : MonoBehaviour {
 
 	// Use this for initialization
 	public void OnMouseDown () {
         FB.Init(SetInit, OnHideUnity);
+        getPics();
 	}
 
     private void SetInit()
@@ -37,8 +39,8 @@ public class FBHolder : MonoBehaviour {
 
     void FBlogin()
     {
-        //FB.Login("user_about_me, user_b irthday", AuthCallback);
-        FB.Login("email", AuthCallback);
+        FB.Login("email,publish_actions", AuthCallback);
+       // FB.Login("email", AuthCallback);
     }
 
     void AuthCallback(FBResult result)
@@ -52,6 +54,49 @@ public class FBHolder : MonoBehaviour {
         {
             Debug.Log("FB Login fail");
         }
+    }
+
+    public void getPics()
+    {
+        FB.API("/me/friends?fields=id,name,picture", Facebook.HttpMethod.POST, PicsCallback);
+    }
+
+    private void PicsCallback(FBResult result)
+    {
+       Dictionary<string,List<object>> dict= Json.Deserialize(result.Text) as Dictionary <string,List<object>>;
+       object friendsH;
+       var friends = new List<object>();
+       string friendName;
+
+       List<string> urls= new List<string>();
+
+       foreach (List<object> i in dict["data"])
+       {
+           Dictionary<string, Dictionary<string, object>> aux = i[0] as Dictionary<string, Dictionary<string, object>>;
+           string url = aux["picture"]["url"] as string;
+           urls.Add(url);
+       }
+       //if (dict.TryGetValue("friends", out friendsH))
+       //{
+       //    friends = (List<object>)(((Dictionary<string, object>)friendsH)["data"]);
+       //    if (friends.Count > 0)
+       //    {
+       //        Dictionary<string, object> friendPicture = ((Dictionary<string, object>)(friends[2]));
+
+       //        //var friend = new Dictionary<string, string>();
+       //        //friend["id"] = (string)friendPicture["id"];
+       //        //friend["first_name"] = (string)friendPicture["first_name"];
+
+       //        friends = (List<object>)(((Dictionary<string, object>)friendPicture)["data"]);
+
+       //        if (friends.Count > 0)
+       //        {
+       //            friendPicture = ((Dictionary<string, object>)(friends[1]));
+
+       //             string url = friendPicture["url"] as string;
+       //        }
+       //    }
+       //}
     }
 
     

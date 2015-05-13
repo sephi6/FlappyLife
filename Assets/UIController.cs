@@ -9,6 +9,9 @@ public class UIController : MonoBehaviour {
     public Text bestScore;
 	public Text scoreMenu;
 
+    public Button share;
+
+
     public int score = 0;
 
 	public bool entra = false;

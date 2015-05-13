@@ -53,6 +53,10 @@ public class Player : MonoBehaviour {
     {
         
         yield return new WaitForSeconds(1.5f);
+        if (!FB.IsLoggedIn)
+        {
+            UIController.instance.share.active=false;
+        }
         UIController.instance.menuMuerte.SetActive(true);
     }
     void OnCollisionEnter2D(Collision2D collider)
