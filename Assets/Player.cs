@@ -79,6 +79,7 @@ public class Player : MonoBehaviour {
             }
 
         choque.Play();
+		UIController.instance.entra=false;
         
         vivo = false;
 		UIController.instance.scoreMenu.text = UIController.instance.score.ToString();
