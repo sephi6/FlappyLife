@@ -174,7 +174,7 @@ namespace Facebook
             {
                 keyHash = (string)parameters["key_hash"];
                 Debug.Log("Keyhash: "+keyHash);
-                testtext.UpdateText(keyHash);
+                //testtext.UpdateText(keyHash);
             }
             else
             {
