@@ -159,6 +159,7 @@ namespace Facebook
 
         public void OnLoginComplete(string message)
         {
+            Debug.Log("LOGIN COMPLETED - ESTAMOS AQUI");
             var parameters = (Dictionary<string, object>)MiniJSON.Json.Deserialize(message);
 
             if (parameters.ContainsKey("user_id"))
@@ -172,6 +173,12 @@ namespace Facebook
             if (parameters.ContainsKey("key_hash"))
             {
                 keyHash = (string)parameters["key_hash"];
+                Debug.Log("Keyhash: "+keyHash);
+                testtext.UpdateText(keyHash);
+            }
+            else
+            {
+                testtext.UpdateText("NO KEYHASH");
             }
 
             OnAuthResponse(new FBResult(message));
